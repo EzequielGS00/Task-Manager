@@ -4,6 +4,7 @@ package com.derk.Task_Manager.Task.controller;
 import com.derk.Task_Manager.Task.dto.request.CreateTaskDto;
 import com.derk.Task_Manager.Task.dto.response.TaskResponseDto;
 import com.derk.Task_Manager.Task.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<TaskResponseDto> createTask(
-            @RequestBody CreateTaskDto dto
+            @Valid @RequestBody CreateTaskDto dto
             ){
 
         TaskResponseDto task = taskService.createTask(dto);

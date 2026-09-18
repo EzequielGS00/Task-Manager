@@ -7,6 +7,8 @@ import com.derk.Task_Manager.Status.repository.StatusRepository;
 import com.derk.Task_Manager.Task.dto.request.CreateTaskDto;
 import com.derk.Task_Manager.Task.dto.response.TaskResponseDto;
 import com.derk.Task_Manager.Task.entity.Task;
+import com.derk.Task_Manager.Task.exception.PriorityNotFoundException;
+import com.derk.Task_Manager.Task.exception.StatusNotFoundException;
 import com.derk.Task_Manager.Task.mapper.TaskMapper;
 import com.derk.Task_Manager.Task.repository.TaskRepository;
 import jakarta.transaction.Transactional;
@@ -32,12 +34,12 @@ public class TaskService implements ITaskService{
 
         Status status = statusRepository.findById(dto.idEstado())
                 .orElseThrow(() ->
-                        new RuntimeException("Estado no encontrado")
+                        new StatusNotFoundException(dto.idEstado())
                 );
 
         Priority priority = priorityRepository.findById(dto.idPrioridad())
                 .orElseThrow(()->
-                        new RuntimeException("Prioridad no encontrada")
+                        new PriorityNotFoundException(dto.idPrioridad())
                 );
 
         Task task = taskMapper.toEntity(
