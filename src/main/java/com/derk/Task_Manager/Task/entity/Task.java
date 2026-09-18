@@ -24,7 +24,7 @@ public class Task {
     @Column(name = "titulo_tarea", nullable = false, length = 100)
     private String tituloTarea;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion_tarea")
     private String descripcionTarea;
 
     @ManyToOne(fetch = FetchType.LAZY)
