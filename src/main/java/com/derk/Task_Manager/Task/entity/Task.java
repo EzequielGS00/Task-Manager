@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tareas")
 public class Task {
@@ -22,7 +21,7 @@ public class Task {
     @Column(name = "uuid_tarea", nullable = false, updatable = false)
     private UUID uuidTask;
 
-    @Column(name = "titulo_tarea", nullable = false)
+    @Column(name = "titulo_tarea", nullable = false, length = 100)
     private String tituloTarea;
 
     @Column(name = "descripcion")
