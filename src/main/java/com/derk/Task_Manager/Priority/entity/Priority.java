@@ -19,8 +19,8 @@ public class Priority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_prioridad")
     private Integer idPrioridad;
-    @Column(name = "tipo_estado")
-    private String tipoEstado;
+    @Column(name = "tipo_prioridad")
+    private String tipoPrioridad;
     @Column(name = "descripcion")
     private String descripcion;
 
