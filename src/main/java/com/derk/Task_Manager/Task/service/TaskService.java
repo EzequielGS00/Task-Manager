@@ -11,11 +11,12 @@ import com.derk.Task_Manager.Task.exception.PriorityNotFoundException;
 import com.derk.Task_Manager.Task.exception.StatusNotFoundException;
 import com.derk.Task_Manager.Task.mapper.TaskMapper;
 import com.derk.Task_Manager.Task.repository.TaskRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -52,5 +53,14 @@ public class TaskService implements ITaskService{
         Task savedTask = taskRepository.save(task);
 
         return taskMapper.toResponseDto(savedTask);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TaskResponseDto> getAllTask() {
+        return taskRepository.findAll()
+                .stream()
+                .map(taskMapper::toResponseDto)
+                .toList();
     }
 }
