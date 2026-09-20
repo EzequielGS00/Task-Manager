@@ -51,6 +51,6 @@ public class TaskService implements ITaskService{
 
         Task savedTask = taskRepository.save(task);
 
-        return taskMapper.taskResponseDto(savedTask);
+        return taskMapper.toResponseDto(savedTask);
     }
 }
