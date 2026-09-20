@@ -26,7 +26,7 @@ public class TaskMapper {
         return task;
     }
 
-    public TaskResponseDto taskResponseDto(Task task) {
+    public TaskResponseDto toResponseDto(Task task) {
         return new TaskResponseDto(
                 task.getUuidTask(),
                 task.getTituloTarea(),
