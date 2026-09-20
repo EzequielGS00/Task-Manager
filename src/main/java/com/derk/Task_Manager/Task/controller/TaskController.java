@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -25,6 +26,12 @@ public class TaskController {
         return ResponseEntity.ok(
                 taskService.getAllTask()
         );
+    }
+
+    @GetMapping("/{uuid}")
+    public ResponseEntity<TaskResponseDto> getTaskById(@PathVariable UUID uuid){
+
+        return ResponseEntity.ok(taskService.getTaskById(uuid));
     }
 
 
