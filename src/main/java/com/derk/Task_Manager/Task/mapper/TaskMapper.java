@@ -3,6 +3,7 @@ package com.derk.Task_Manager.Task.mapper;
 import com.derk.Task_Manager.Priority.entity.Priority;
 import com.derk.Task_Manager.Status.entity.Status;
 import com.derk.Task_Manager.Task.dto.request.CreateTaskDto;
+import com.derk.Task_Manager.Task.dto.request.UpdateTaskDto;
 import com.derk.Task_Manager.Task.dto.response.TaskResponseDto;
 import com.derk.Task_Manager.Task.entity.Task;
 import org.springframework.stereotype.Component;
@@ -42,5 +43,18 @@ public class TaskMapper {
                 task.getFechaLimite(),
                 task.getFechaFinalizacion()
         );
+    }
+
+    public void updateEntity(
+            Task task,
+            UpdateTaskDto dto,
+            Status status,
+            Priority priority
+    ){
+        task.setTituloTarea(dto.tituloTarea());
+        task.setDescripcionTarea(dto.descripcionTarea());
+        task.setEstadoTarea(status);
+        task.setPrioridadTarea(priority);
+        task.setFechaLimite(dto.fechaLimite());
     }
 }
