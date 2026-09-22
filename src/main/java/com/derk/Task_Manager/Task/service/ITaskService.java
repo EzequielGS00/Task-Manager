@@ -13,4 +13,5 @@ public interface ITaskService {
     List<TaskResponseDto> getAllTask();
     TaskResponseDto getTaskById(UUID uuid);
     TaskResponseDto updateTask(UUID uuid, UpdateTaskDto dto);
+    void deleteTask(UUID uuid);
 }

@@ -106,4 +106,14 @@ public class TaskService implements ITaskService{
         //Task updateTask = taskRepository.save(task);
         return taskMapper.toResponseDto(task);
     }
+
+    @Override
+    @Transactional
+    public void deleteTask(UUID uuid) {
+        Task task = taskRepository.findById(uuid)
+                .orElseThrow(()->
+                        new TaskNotFoundException(uuid));
+
+        taskRepository.delete(task);
+    }
 }
