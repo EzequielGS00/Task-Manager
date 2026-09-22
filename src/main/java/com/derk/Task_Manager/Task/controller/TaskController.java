@@ -2,6 +2,7 @@ package com.derk.Task_Manager.Task.controller;
 
 
 import com.derk.Task_Manager.Task.dto.request.CreateTaskDto;
+import com.derk.Task_Manager.Task.dto.request.UpdateTaskDto;
 import com.derk.Task_Manager.Task.dto.response.TaskResponseDto;
 import com.derk.Task_Manager.Task.service.TaskService;
 import jakarta.validation.Valid;
@@ -45,6 +46,16 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(task);
 
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<TaskResponseDto> updateTask(
+            @PathVariable UUID uuid,
+            @Valid @RequestBody UpdateTaskDto dto
+            ){
+        return ResponseEntity.ok(
+                taskService.updateTask(uuid, dto)
+        );
     }
 
 }
