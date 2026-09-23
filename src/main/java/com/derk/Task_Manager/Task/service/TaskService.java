@@ -6,6 +6,8 @@ import com.derk.Task_Manager.Status.entity.Status;
 import com.derk.Task_Manager.Status.repository.StatusRepository;
 import com.derk.Task_Manager.Task.dto.request.CreateTaskDto;
 import com.derk.Task_Manager.Task.dto.request.UpdateTaskDto;
+import com.derk.Task_Manager.Task.dto.request.UpdateTaskPriorityDto;
+import com.derk.Task_Manager.Task.dto.request.UpdateTaskStatusDto;
 import com.derk.Task_Manager.Task.dto.response.TaskResponseDto;
 import com.derk.Task_Manager.Task.entity.Task;
 import com.derk.Task_Manager.Task.exception.PriorityNotFoundException;
@@ -115,5 +117,40 @@ public class TaskService implements ITaskService{
                         new TaskNotFoundException(uuid));
 
         taskRepository.delete(task);
+    }
+
+    @Override
+    @Transactional
+    public TaskResponseDto updateTaskStatus(UUID uuid, UpdateTaskStatusDto dto) {
+
+        Task task = taskRepository.findById(uuid)
+                .orElseThrow(() ->
+                        new TaskNotFoundException(uuid));
+        Status status = statusRepository.findById(dto.idEstado())
+                .orElseThrow(() ->
+                        new StatusNotFoundException(dto.idEstado())
+                );
+
+        task.setEstadoTarea(status);
+
+        Task updateTask = taskRepository.save(task);
+        return taskMapper.toResponseDto(updateTask);
+    }
+
+    @Override
+    @Transactional
+    public TaskResponseDto updateTaskPrority(UUID uuid, UpdateTaskPriorityDto dto) {
+
+        Task task = taskRepository.findById(uuid)
+                .orElseThrow(()->
+                        new TaskNotFoundException(uuid));
+
+        Priority priority = priorityRepository.findById(dto.idPrioridad())
+                .orElseThrow(() ->
+                        new PriorityNotFoundException(dto.idPrioridad()));
+
+        Task updateTask = taskRepository.save(task);
+
+        return taskMapper.toResponseDto(updateTask);
     }
 }

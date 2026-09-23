@@ -3,6 +3,8 @@ package com.derk.Task_Manager.Task.controller;
 
 import com.derk.Task_Manager.Task.dto.request.CreateTaskDto;
 import com.derk.Task_Manager.Task.dto.request.UpdateTaskDto;
+import com.derk.Task_Manager.Task.dto.request.UpdateTaskPriorityDto;
+import com.derk.Task_Manager.Task.dto.request.UpdateTaskStatusDto;
 import com.derk.Task_Manager.Task.dto.response.TaskResponseDto;
 import com.derk.Task_Manager.Task.service.TaskService;
 import jakarta.validation.Valid;
@@ -64,6 +66,26 @@ public class TaskController {
     ){
         taskService.deleteTask(uuid);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{uuid}/status")
+    public ResponseEntity<TaskResponseDto> updateTaskStatus(
+            @PathVariable UUID uuid,
+            @Valid @RequestBody UpdateTaskStatusDto dto
+    ){
+        return ResponseEntity.ok(
+                taskService.updateTaskStatus(uuid, dto)
+        );
+    }
+
+    @PatchMapping("/{uuid}/priority")
+    public ResponseEntity<TaskResponseDto> updateTaskPriority(
+            @PathVariable UUID uuid,
+            @Valid @RequestBody UpdateTaskPriorityDto dto
+    ){
+        return  ResponseEntity.ok(
+                taskService.updateTaskPrority(uuid, dto)
+        );
     }
 
 }
